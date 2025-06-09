@@ -3,13 +3,8 @@ node_modules/
 frontend/node_modules/
 
 # Ignore CSV and other large data files
-*.csv
-*.json
-*.zip
-*.tar.gz
-frontend/public/cleaned_sld_data.csv
+
 # Ignore Mac system files
 .DS_Store
 
 # Ignore build output
-frontend/build/
