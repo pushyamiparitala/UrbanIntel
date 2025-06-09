@@ -1,0 +1,632 @@
+:root {
+  /* Light theme variables */
+  --background-light: #f5f7fa;
+  --card-bg-light: #ffffff;
+  --text-primary-light: #2d3748; /* Dark Gray for text */
+  --text-secondary-light: #718096; /* Medium Gray for subtitles */
+  --border-light: #e2e8f0;
+  --accent-light: #4299e1; /* Blue accent */
+  --accent-lighter-light: #63b3ed; /* Lighter blue */
+  --hover-light: #ebf8ff;
+  --chart-grid-light: #e2e8f0;
+
+  /* Dark theme variables */
+  --background-dark: #1a202c; /* Very Dark Blue/Gray */
+  --card-bg-dark: #2d3748; /* Dark Gray/Blue */
+  --text-primary-dark: #f7fafc; /* Almost White */
+  --text-secondary-dark: #a0aec0; /* Light Gray */
+  --border-dark: #4a5568; /* Darker Gray for borders */
+  --accent-dark: #63b3ed; /* Lighter Blue accent for dark mode */
+  --accent-lighter-dark: #90cdf4; /* Even Lighter Blue */
+  --hover-dark: #2a4365;
+  --chart-grid-dark: #4a5568;
+
+  /* Common variables (can be overridden by themes if needed) */
+  --title-gradient-default: linear-gradient(120deg, #4299e1 0%, #63b3ed 100%);
+  --title-shadow-default: 0 2px 4px rgba(0,0,0,0.1);
+  --input-shadow-default: none; /* e.g., 0 1px 3px rgba(0,0,0,0.1) inset; */
+  --card-shadow-default: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Theme classes */
+.light-theme {
+  --background: var(--background-light);
+  --card-bg: var(--card-bg-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --text-color-primary: var(--text-primary-light); /* Mapping for existing rules */
+  --text-color-secondary: var(--text-secondary-light); /* Mapping for existing rules */
+  --border: var(--border-light);
+  --accent: var(--accent-light);
+  --accent-lighter: var(--accent-lighter-light);
+  --text-color-accent: var(--accent-light); /* Mapping for existing rules */
+  --hover: var(--hover-light);
+  --chart-grid-color: var(--chart-grid-light);
+
+  --title-gradient: var(--title-gradient-default); /* Can customize per theme if needed */
+  --title-shadow: var(--title-shadow-default);
+  --input-border-color: var(--border-light);
+  --input-bg-color: var(--card-bg-light);
+  --input-shadow: var(--input-shadow-default);
+  --card-shadow: var(--card-shadow-default);
+}
+
+.dark-theme {
+  --background: var(--background-dark);
+  --card-bg: var(--card-bg-dark);
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --text-color-primary: var(--text-primary-dark); /* Mapping for existing rules */
+  --text-color-secondary: var(--text-secondary-dark); /* Mapping for existing rules */
+  --border: var(--border-dark);
+  --accent: var(--accent-dark);
+  --accent-lighter: var(--accent-lighter-dark);
+  --text-color-accent: var(--accent-dark); /* Mapping for existing rules */
+  --hover: var(--hover-dark);
+  --chart-grid-color: var(--chart-grid-dark);
+
+  --title-gradient: linear-gradient(120deg, var(--accent-dark) 0%, var(--accent-lighter-dark) 100%); /* Example of theme-specific gradient */
+  --title-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Darker shadow for dark theme */
+  --input-border-color: var(--border-dark);
+  --input-bg-color: var(--card-bg-dark);
+  --input-shadow: var(--input-shadow-default);
+  --card-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Adjusted shadow for dark theme */
+}
+
+/* Global styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.app-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* ==================
+   Dashboard Header Card
+   ================== */
+
+.dashboard-intro-card {
+  background-color: var(--card-bg);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 30px;
+  text-align: center; /* Center align text content */
+  position: relative; /* For positioning the theme toggle */
+}
+
+.dashboard-header {
+  /* This class can be used for further specific styling if needed,
+     but primary layout is handled by dashboard-intro-card */
+  margin-bottom: 15px; /* Space before filter */
+}
+
+.dashboard-title {
+  font-size: 2.8em; /* Larger title */
+  font-weight: bold;
+  margin-bottom: 10px;
+  background: var(--title-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* For non-webkit browsers, provide a fallback color if gradient text isn't supported */
+  color: transparent; 
+  filter: var(--title-shadow);
+  /* Fallback for browsers that don't support -webkit-background-clip: text */
+  /* Or use a solid color: color: var(--text-color-accent); */
+}
+
+.dashboard-subtitle {
+  font-size: 1.1em;
+  color: var(--text-color-secondary);
+  margin-bottom: 20px;
+  max-width: 600px; /* Prevent subtitle from being too wide */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.filter-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  position: relative;
+}
+
+.filter-controls .MuiFormControl-root {
+  width: 100%;
+  min-width: 300px;
+}
+
+.filter-controls .MuiSelect-select {
+  min-height: 56px !important;
+  padding: 8px 14px !important;
+}
+
+.filter-controls .MuiChip-root {
+  margin: 2px;
+  max-width: calc(100% - 4px);
+  overflow: hidden;
+}
+
+.filter-controls .MuiMenuItem-root {
+  padding: 12px 16px;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.filter-controls .MuiSelect-select.MuiSelect-outlined {
+  padding-top: 16px !important;
+}
+
+/* Adjust theme toggle button position inside the intro card */
+.dashboard-intro-card .theme-toggle {
+  position: absolute;
+  top: 20px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
+  /* Ensure it's above other content if necessary, though usually not for simple buttons */
+  /* z-index: 10; */ 
+}
+
+/* Responsive adjustments for the intro card */
+@media (max-width: 768px) {
+  .dashboard-title {
+    font-size: 2.2em;
+  }
+  .dashboard-subtitle {
+    font-size: 1em;
+  }
+  .dashboard-intro-card .theme-toggle {
+    top: 15px;
+    right: 15px;
+  }
+  .filter-controls {
+    margin: 16px auto;
+    gap: 12px;
+  }
+  .filter-controls .MuiFormControl-root {
+    min-width: 250px;
+  }
+  
+  .filter-controls .MuiSelect-select {
+    min-height: 48px !important;
+  }
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  font-size: 1.5rem;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(15deg);
+  background: var(--hover);
+  box-shadow: 0 0 10px var(--accent_lighter);
+}
+
+/* Chart Row Layout */
+.chart-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* Modern Card Design */
+.chart-card {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+  margin-bottom: 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  height: 100%;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.chart-card-header {
+  margin-bottom: 16px;
+}
+
+.chart-card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.chart-card-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.chart-container {
+  flex: 1;
+  min-height: 400px;
+  width: 100%;
+  position: relative;
+}
+
+/* Metrics and Stats */
+.metric-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.metric-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.trend-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.875rem;
+  margin-top: 8px;
+}
+
+.trend-up {
+  color: #48bb78;
+}
+
+.trend-down {
+  color: #f56565;
+}
+
+/* Form Controls */
+select, button {
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+select:hover, button:hover {
+  border-color: var(--accent);
+  background: var(--hover);
+}
+
+/* Tooltip (general for D3, Chart.js has its own tooltip styling via options) */
+.tooltip {
+  position: absolute;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  padding: 10px 14px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 0.875rem;
+  pointer-events: none;
+  z-index: 10000;
+  border: 1px solid var(--border);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Leaflet Custom Popup */
+.custom-leaflet-popup .leaflet-popup-content-wrapper {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.custom-leaflet-popup .leaflet-popup-content {
+  margin: 12px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.custom-leaflet-popup .leaflet-popup-tip {
+  background-color: var(--card-bg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .chart-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .chart-card {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .chart-card {
+    padding: 16px;
+    min-height: 350px;
+  }
+  
+  .chart-card-title {
+    font-size: 1.25rem;
+  }
+  
+  .chart-container {
+    min-height: 300px;
+  }
+}
+
+/* Metric Cards */
+.metric-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.metric-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+/* Loading States */
+.loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--card-bg) 0%,
+    var(--hover) 50%,
+    var(--card-bg) 100%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* New styles for side-by-side cards */
+.chart-card-half {
+  flex: 1 1 calc(50% - 12px); /* Each card takes up half the space, minus half the gap */
+  min-width: 300px; /* Minimum width before wrapping */
+  /* The existing .chart-card styles (padding, margin-bottom) will apply. */
+  /* We remove individual margin-bottom from chart-card-half as chart-row handles it */
+  margin-bottom: 0 !important; 
+}
+
+/* Ensure chart-card-half still looks like a card if it needs specific overrides */
+.chart-card-half .chart-card-header {
+  /* Customizations if needed, but likely inherits well from .chart-card-header */
+}
+
+.chart-card-half .chart-container {
+  /* Customizations if needed, e.g., for height */
+}
+
+/* --- Top Navigation Bar --- */
+.top-nav-bar {
+  display: flex;
+  justify-content: space-between; /* Pushes logo/title left, actions right */
+  align-items: center;
+  padding: 0.75rem 1.5rem; /* Adjust padding as needed */
+  position: sticky; /* Optional: makes the nav bar stick to the top on scroll */
+  top: 0;
+  z-index: 1000; /* Ensures it stays on top of other content if sticky */
+}
+
+.logo-and-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* Space between logo and title */
+}
+
+.logo-placeholder { /* Or your .actual-logo-class */
+  font-size: 1.8rem; /* Adjust size */
+  color: var(--text-primary);
+}
+
+.top-nav-title {
+  font-size: 1.4rem; /* Adjust size */
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.top-nav-actions {
+  display: flex;
+  align-items: center;
+}
+
+.theme-toggle-button {
+  background: none;
+  border: none;
+  font-size: 1.6rem; /* Adjust size for the gear icon */
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex; /* Helps align the icon if it's an SVG or has weird spacing */
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle-button:hover {
+  color: var(--text-primary);
+}
+
+/* --- Header Section (Subtitle & Filters) --- */
+.dashboard-header-section {
+  padding: 1.5rem;
+  text-align: center; 
+  border-bottom: 1px solid var(--border-color); /* Optional: remove if no border desired */
+}
+
+.dashboard-header-section .dashboard-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.dashboard-header-section .filter-controls {
+  display: inline-flex; /* Allows centering of the block */
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem; /* Space above the filter */
+}
+
+.dashboard-header-section .filter-controls label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.dashboard-header-section .filter-controls select {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  min-width: 300px; /* Adjust as needed */
+  text-align: left; /* Ensure text in select is left-aligned */
+}
+
+/* --- Theme Specific Styling for Nav and Header --- */
+
+/* Light Theme */
+body.light-theme .top-nav-bar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0; 
+}
+
+body.light-theme .top-nav-title,
+body.light-theme .logo-placeholder {
+  color: #2d3748; /* Dark text for light navbar */
+}
+body.light-theme .theme-toggle-button {
+  color: #718096; /* Secondary text color for icon */
+}
+body.light-theme .theme-toggle-button:hover {
+  color: #2d3748; /* Primary text color on hover */
+}
+
+body.light-theme .dashboard-header-section {
+   background-color: #f7f9fc; /* Desired light theme background for this section */
+   border-bottom-color: var(--border-color); 
+}
+body.light-theme .dashboard-header-section .dashboard-subtitle,
+body.light-theme .dashboard-header-section .filter-controls label {
+  color: #4a5568; 
+}
+
+/* Dark Theme */
+body.dark-theme .top-nav-bar {
+  background-color: #2d3748; 
+  border-bottom: 1px solid #4a5568; 
+}
+
+body.dark-theme .top-nav-title,
+body.dark-theme .logo-placeholder {
+  color: #f7fafc; /* Light text for dark navbar */
+}
+body.dark-theme .theme-toggle-button {
+  color: #a0aec0; /* Lighter secondary text for icon */
+}
+body.dark-theme .theme-toggle-button:hover {
+  color: #f7fafc; /* Primary light text color on hover */
+}
+
+body.dark-theme .dashboard-header-section {
+   background-color: var(--background); /* Use theme variable for dark background (e.g., #1a202c) */
+   border-bottom-color: var(--border-color); 
+}
+body.dark-theme .dashboard-header-section .dashboard-subtitle,
+body.dark-theme .dashboard-header-section .filter-controls label {
+  color: #cbd5e1; /* Lighter secondary text for readability */
+}
+
+/* Ensure your CSS variables are defined, for example: */
+:root {
+  --body-bg: #f0f2f5;
+  --card-bg: #ffffff;
+  --text-primary: #2d3748;
+  --text-secondary: #718096;
+  --border-color: #e2e8f0;
+}
+
+body.dark-theme {
+  --body-bg: #1a202c;
+  --card-bg: #2d3748;
+  --text-primary: #f7fafc;
+  --text-secondary: #a0aec0;
+  --border-color: #4a5568;
+} 
