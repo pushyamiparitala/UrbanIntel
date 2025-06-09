@@ -1,0 +1,15 @@
+# Ignore node_modules
+node_modules/
+frontend/node_modules/
+
+# Ignore CSV and other large data files
+*.csv
+*.json
+*.zip
+*.tar.gz
+
+# Ignore Mac system files
+.DS_Store
+
+# Ignore build output
+frontend/build/
