@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/UrbanIntel/static/css/main.0da0a19e.css",
+    "main.js": "/UrbanIntel/static/js/main.c7df607f.js",
+    "index.html": "/UrbanIntel/index.html",
+    "main.0da0a19e.css.map": "/UrbanIntel/static/css/main.0da0a19e.css.map",
+    "main.c7df607f.js.map": "/UrbanIntel/static/js/main.c7df607f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0da0a19e.css",
+    "static/js/main.c7df607f.js"
+  ]
+}
